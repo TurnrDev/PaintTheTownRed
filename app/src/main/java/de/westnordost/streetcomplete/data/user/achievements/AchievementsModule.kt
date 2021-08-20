@@ -146,6 +146,14 @@ object AchievementsModule {
             R.string.link_qwant_maps_description
         ),
         Link(
+            "organic_maps",
+            "https://organicmaps.app/",
+            "Organic Maps",
+            LinkCategory.MAPS,
+            R.drawable.ic_link_organic_maps,
+            R.string.link_organic_maps_description
+        ),
+        Link(
             "cyclosm",
             "https://www.cyclosm.org",
             "CyclOSM",
@@ -507,7 +515,8 @@ object AchievementsModule {
                     "AddBusStopLit",
                     "AddBusStopFlag",
                     "AddCrossingIsland",
-                    "AddBarrierType"
+                    "AddBarrierType",
+                    "AddCrossing"
                 )
             ),
             // levels: 10, 30, 60, 100, 150, 210, 280, 360, 450, 550, 660, 780, 910, 1050, ...
@@ -690,7 +699,8 @@ object AchievementsModule {
             mapOf(
                 1 to links("openstreetbrowser"),
                 2 to links("qwant_maps"),
-                3 to links("indoorequal")
+                3 to links("organic_maps"),
+                4 to links("indoorequal")
             )
         ),
 

@@ -1,3 +1,23 @@
+34.0-beta1: |
+  <h3>New Quests</h3>
+  <ul>
+  <li><i>Is this spot suitable to cross the road and is it legal to do so here?</i> (#398, #2999)</li>
+  </ul>
+  <h3>Enhancements</h3>
+  <ul>
+  <li>The roof shape quest is no longer enabled by default - you can enable it in the settings (#3161), by @matkoniecz</li>
+  <li>Clearer wording when explaining the team mode (#3170, #3172) by @matkoniecz and @smichel17</li>
+  <li>Ask for more disused places whether they are no longer vacant (#3158)</li>
+  <li>Add Animism as choice for when asked about the religion of a place (#3063)</li>
+  <li>Add more building type choices: allotment house, boathouse and grandstand (#3078)</li>
+  <li>Stone stiles are now more clearly selectable (#3175) by @matkoniecz</li>
+  <li>More minor quest enhancements and clarified wordings: (#3139) by @john-h-kastner, (#3117) by @smichel17, (#3165) by @yrtimiD, (#3092, #3149, #2760, ...)</li>
+  </ul>
+  <h3>Fixes</h3>
+  <ul>
+  <li>Fix layout for right-to-left languages (Persian, Arabic) (#3181, #3184)</li>
+  </ul>
+
 v33.2: |
   <h3>Fixes</h3>
   <ul>
@@ -14,7 +34,7 @@ v33.2: |
   <ul>
   <li>Number of lanes: Don't ask if they have been recorded for both sides individually already (#3038), by @FloEdelmann</li>
   <li>Enable cycleways and tactile pavings quest for Croatia (#3041), by @mnalis</li>
-  <li>Allow to split the way on asking whether a set of steps have a handrail (#3037), by @peternewman</li>
+  <li>Allow splitting ways when asking whether a set of steps has a handrail (#3037), by @peternewman</li>
   <li>Allow answering that a place does not exist when asking whether it offers Kosher food (#3073), by @peternewman</li>
   <li>For pubs that definitely serve food, also ask whether they have vegetarian and vegan food (#3097, #3099), by @peternewman</li>
   <li>Don't ask whether a place offers vegetarian food if it only offers vegan food (#3072, #3081), by @starsep</li>
