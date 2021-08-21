@@ -2,7 +2,7 @@ package de.westnordost.streetcomplete.data.visiblequests
 
 import de.westnordost.streetcomplete.data.quest.DayNightCycle.*
 import de.westnordost.streetcomplete.data.quest.Quest
-import de.westnordost.streetcomplete.util.isNight
+import de.westnordost.streetcomplete.util.isDay
 import javax.inject.Inject
 
 class DayNightQuestFilter @Inject internal constructor() {
@@ -13,8 +13,8 @@ class DayNightQuestFilter @Inject internal constructor() {
     fun isVisible(quest: Quest): Boolean {
         return when (quest.type.dayNightCycle) {
             DAY_AND_NIGHT -> true
-            ONLY_DAY -> !isNight(quest.position)
-            ONLY_NIGHT -> isNight(quest.position)
+            ONLY_DAY -> isDay(quest.position)
+            ONLY_NIGHT -> !isDay(quest.position)
         }
     }
 }

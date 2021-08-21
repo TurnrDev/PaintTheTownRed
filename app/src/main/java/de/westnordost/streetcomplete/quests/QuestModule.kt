@@ -130,13 +130,11 @@ import javax.inject.Singleton
         // ↓ 1. notes
         OsmNoteQuestType,
 
-        // ↓ 1A. lit quests
+        // ↓ 2. time-specific quests, such as lit quests which are moved to only show ar night
         AddWayLit(), //  used by OsmAnd if "Street lighting" is enabled. (Configure map, Map rendering, Details)
-        AddPitchLit(),
         AddBusStopLit(),
 
-
-        // ↓ 2. important data that is used by many data consumers
+        // ↓ 3. important data that is used by many data consumers
         AddRoadName(),
         AddPlaceName(featureDictionaryFuture),
         AddOneway(),
@@ -160,7 +158,7 @@ import javax.inject.Singleton
         AddReligionToPlaceOfWorship(), // icons on maps are different - OSM Carto, mapy.cz, OsmAnd, Sputnik etc
         AddParkingAccess(), //OSM Carto, mapy.cz, OSMand, Sputnik etc
 
-        // ↓ 3. useful data that is used by some data consumers
+        // ↓ 4. useful data that is used by some data consumers
         AddRecyclingType(),
         AddRecyclingContainerMaterials(),
         AddSport(),
@@ -199,15 +197,15 @@ import javax.inject.Singleton
         AddFerryAccessMotorVehicle(),
         AddAcceptsCash(featureDictionaryFuture),
 
-        // ↓ 4. definitely shown as errors in QA tools
+        // ↓ 5. definitely shown as errors in QA tools
 
-        // ↓ 5. may be shown as missing in QA tools
+        // ↓ 6. may be shown as missing in QA tools
         DetermineRecyclingGlass(), // because most recycling:glass=yes is a tagging mistake
 
-        // ↓ 6. may be shown as possibly missing in QA tools
+        // ↓ 7. may be shown as possibly missing in QA tools
         AddPlacePhone(featureDictionaryFuture),
 
-        // ↓ 7. data useful for only a specific use case
+        // ↓ 8. data useful for only a specific use case
         AddToiletsFee(), // used by OsmAnd in the object description
         AddBabyChangingTable(), // used by OsmAnd in the object description
         AddBikeParkingCover(), // used by OsmAnd in the object description
@@ -245,9 +243,10 @@ import javax.inject.Singleton
         AddBollardType(), // useful for first responders
         AddCameraType(),
 
-        // ↓ 8. defined in the wiki, but not really used by anyone yet. Just collected for
+        // ↓ 9. defined in the wiki, but not really used by anyone yet. Just collected for
         //      the sake of mapping it in case it makes sense later
         AddPitchSurface(),
+        AddPitchLit(), // Not affected by new DayNight cycle because the lights are usually only on during games
         AddIsDefibrillatorIndoor(),
         AddSummitRegister(),
         AddCyclewayPartSurface(),
