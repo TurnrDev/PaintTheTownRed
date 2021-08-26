@@ -87,7 +87,7 @@ class AddPlacePhone(
         and !phone and !contact:phone and phone:signed != no
     """.trimIndent()).toElementFilterExpression() }
 
-    override val commitMessage = "Determine phone number for places (Private SC quest)"
+    override val commitMessage = "Determine phone number for shops"
     override val wikiLink = "Key:phone"
     override val icon = R.drawable.ic_quest_phone
     override val isReplaceShopEnabled = true
