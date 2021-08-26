@@ -287,8 +287,8 @@ import javax.inject.Singleton
         AddChargingStationOperator(),
 
         // postboxes (collection times are further up, see comment)
-        AddPostboxRef(),
         AddPostboxRoyalCypher(),
+        AddPostboxRef(),
 
         AddWheelchairAccessOutside(),
 
