@@ -38,9 +38,10 @@ import de.westnordost.streetcomplete.data.upload.VersionBannedException
 import de.westnordost.streetcomplete.data.user.AuthorizationException
 import de.westnordost.streetcomplete.data.user.UserController
 import de.westnordost.streetcomplete.ktx.toast
+import de.westnordost.streetcomplete.location.createLocationAvailabilityIntentFilter
+import de.westnordost.streetcomplete.location.isLocationEnabled
 import de.westnordost.streetcomplete.location.LocationRequestFragment
 import de.westnordost.streetcomplete.location.LocationState
-import de.westnordost.streetcomplete.location.LocationUtil
 import de.westnordost.streetcomplete.map.MainFragment
 import de.westnordost.streetcomplete.notifications.NotificationsContainerFragment
 import de.westnordost.streetcomplete.tutorial.TutorialFragment
@@ -126,11 +127,12 @@ class MainActivity : AppCompatActivity(),
     public override fun onStart() {
         super.onStart()
 
-        registerReceiver(locationAvailabilityReceiver, LocationUtil.createLocationAvailabilityIntentFilter())
+        registerReceiver(locationAvailabilityReceiver, createLocationAvailabilityIntentFilter())
         LocalBroadcastManager.getInstance(this).registerReceiver(
             locationRequestFinishedReceiver, IntentFilter(LocationRequestFragment.ACTION_FINISHED))
 
         downloadController.showNotification = false
+        uploadController.showNotification = false
         uploadController.addUploadProgressListener(uploadProgressListener)
         downloadController.addDownloadProgressListener(downloadProgressListener)
         updateLocationAvailability()
@@ -177,6 +179,7 @@ class MainActivity : AppCompatActivity(),
         LocalBroadcastManager.getInstance(this).unregisterReceiver(locationRequestFinishedReceiver)
         unregisterReceiver(locationAvailabilityReceiver)
         downloadController.showNotification = true
+        uploadController.showNotification = true
         uploadController.removeUploadProgressListener(uploadProgressListener)
         downloadController.removeDownloadProgressListener(downloadProgressListener)
     }
@@ -299,7 +302,7 @@ class MainActivity : AppCompatActivity(),
     /* ------------------------------------ Location listener ----------------------------------- */
 
     private fun updateLocationAvailability() {
-        if (LocationUtil.isLocationOn(this)) {
+        if (isLocationEnabled(this)) {
             questAutoSyncer.startPositionTracking()
         } else {
             questAutoSyncer.stopPositionTracking()
