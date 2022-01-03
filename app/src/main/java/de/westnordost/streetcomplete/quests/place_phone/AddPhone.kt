@@ -7,10 +7,11 @@ import de.westnordost.streetcomplete.data.elementfilter.toElementFilterExpressio
 import de.westnordost.streetcomplete.data.osm.mapdata.Element
 import de.westnordost.streetcomplete.data.osm.mapdata.MapDataWithGeometry
 import de.westnordost.streetcomplete.data.osm.osmquests.OsmElementQuestType
+import de.westnordost.streetcomplete.data.user.achievements.QuestTypeAchievement
 import de.westnordost.streetcomplete.ktx.containsAny
 import java.util.concurrent.FutureTask
 
-class AddPlacePhone(
+class AddPhone(
     private val featureDictionaryFuture: FutureTask<FeatureDictionary>
 ) : OsmElementQuestType<PlacePhoneAnswer> {
 
@@ -92,6 +93,8 @@ class AddPlacePhone(
     override val icon = R.drawable.ic_quest_phone
     override val isReplaceShopEnabled = true
 
+    override val questTypeAchievements = listOf(QuestTypeAchievement.CITIZEN)
+
     override fun getTitle(tags: Map<String, String>): Int {
         val hasProperName = hasProperName(tags)
         val hasFeatureName = hasFeatureName(tags)
@@ -122,7 +125,7 @@ class AddPlacePhone(
         return filter.matches(element)
     }
 
-    override fun createForm() = AddPlacePhoneForm()
+    override fun createForm() = AddPhoneForm()
 
     override fun applyAnswerTo(answer: PlacePhoneAnswer, changes: StringMapChangesBuilder) {
         when (answer) {

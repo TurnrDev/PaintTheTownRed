@@ -86,7 +86,7 @@ import de.westnordost.streetcomplete.quests.parking_type.AddParkingType
 import de.westnordost.streetcomplete.quests.picnic_table_cover.AddPicnicTableCover
 import de.westnordost.streetcomplete.quests.pitch_lit.AddPitchLit
 import de.westnordost.streetcomplete.quests.place_name.AddPlaceName
-import de.westnordost.streetcomplete.quests.place_phone.AddPlacePhone
+import de.westnordost.streetcomplete.quests.place_phone.AddPhone
 import de.westnordost.streetcomplete.quests.playground_access.AddPlaygroundAccess
 import de.westnordost.streetcomplete.quests.postbox_collection_times.AddPostboxCollectionTimes
 import de.westnordost.streetcomplete.quests.postbox_ref.AddPostboxRef
@@ -289,7 +289,7 @@ import javax.inject.Singleton
         AddPlaceName(featureDictionaryFuture),
         SpecifyShopType(),
         CheckShopType(),
-        AddPlacePhone(featureDictionaryFuture),
+        AddPhone(featureDictionaryFuture),
         AddOpeningHours(featureDictionaryFuture),
 
         AddAtmOperator(),
