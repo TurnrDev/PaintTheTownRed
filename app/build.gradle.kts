@@ -72,6 +72,7 @@ android {
         ignore("UseCompatLoadingForDrawables") // doesn't make sense for minSdk >= 21
         isAbortOnError = false
     }
+    namespace = "de.westnordost.streetcomplete"
 }
 
 
