@@ -8,7 +8,6 @@ import de.westnordost.streetcomplete.data.osm.mapdata.MapDataApi
 import de.westnordost.streetcomplete.data.osm.osmquests.OsmElementQuestType
 import de.westnordost.streetcomplete.data.quest.QuestType
 import de.westnordost.streetcomplete.data.upload.ConflictException
-import de.westnordost.streetcomplete.ktx.toBcp47LanguageTag
 import java.util.Locale
 import javax.inject.Inject
 
@@ -19,7 +18,7 @@ class OpenQuestChangesetsManager @Inject constructor(
     private val changesetAutoCloser: ChangesetAutoCloser,
     private val lastEditTimeStore: LastEditTimeStore
 ) {
-    fun getOrCreateChangeset(questType: OsmElementQuestType<*>, source: String): Long {
+    fun getOrCreateChangeset(questType: OsmElementQuestType<*>, source: String): Long  = synchronized(this) {
         val openChangeset = openChangesetsDB.get(questType.name, source)
         return if (openChangeset?.changesetId != null) {
             openChangeset.changesetId
@@ -28,7 +27,7 @@ class OpenQuestChangesetsManager @Inject constructor(
         }
     }
 
-    fun createChangeset(questType: OsmElementQuestType<*>, source: String): Long {
+    fun createChangeset(questType: OsmElementQuestType<*>, source: String): Long = synchronized(this) {
         val changesetId = mapDataApi.openChangeset(createChangesetTags(questType, source))
         openChangesetsDB.put(OpenChangeset(questType.name, source, changesetId))
         changesetAutoCloser.enqueue(CLOSE_CHANGESETS_AFTER_INACTIVITY_OF)
@@ -36,7 +35,7 @@ class OpenQuestChangesetsManager @Inject constructor(
         return changesetId
     }
 
-    @Synchronized fun closeOldChangesets() {
+    fun closeOldChangesets() = synchronized(this) {
         val timePassed = System.currentTimeMillis() - lastEditTimeStore.get()
         if (timePassed < CLOSE_CHANGESETS_AFTER_INACTIVITY_OF) return
 
@@ -56,7 +55,7 @@ class OpenQuestChangesetsManager @Inject constructor(
         mapOf(
             "comment" to questType.commitMessage,
             "created_by" to USER_AGENT,
-            "locale" to Locale.getDefault().toBcp47LanguageTag(),
+            "locale" to Locale.getDefault().toLanguageTag(),
             QUESTTYPE_TAG_KEY to questType.name,
             "source" to source
         )
