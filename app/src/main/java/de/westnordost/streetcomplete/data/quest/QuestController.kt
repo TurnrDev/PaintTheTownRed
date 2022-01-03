@@ -2,7 +2,7 @@ package de.westnordost.streetcomplete.data.quest
 
 import android.util.Log
 import de.westnordost.streetcomplete.ApplicationConstants
-import de.westnordost.streetcomplete.data.meta.KEYS_THAT_SHOULD_NOT_BE_REMOVED_WHEN_SHOP_IS_REPLACED
+import de.westnordost.streetcomplete.data.meta.KEYS_THAT_SHOULD_BE_REMOVED_WHEN_SHOP_IS_REPLACED
 import de.westnordost.streetcomplete.data.osm.edits.*
 import de.westnordost.streetcomplete.data.osm.edits.delete.DeletePoiNodeAction
 import de.westnordost.streetcomplete.data.osm.edits.split_way.SplitPolylineAtPosition
@@ -142,7 +142,7 @@ import kotlin.collections.ArrayList
 
         // first remove old tags
         for ((key, value) in previousTags) {
-            val isOkToRemove = KEYS_THAT_SHOULD_NOT_BE_REMOVED_WHEN_SHOP_IS_REPLACED.none { it.matches(key) }
+            val isOkToRemove = KEYS_THAT_SHOULD_BE_REMOVED_WHEN_SHOP_IS_REPLACED.any { it.matches(key) }
             if (isOkToRemove && !newTags.containsKey(key)) {
                 changesList.add(StringMapEntryDelete(key, value))
             }
@@ -186,9 +186,7 @@ import kotlin.collections.ArrayList
         q: OsmQuest,
         answer: Any, source: String
     ): Boolean = withContext(Dispatchers.IO) {
-        val e = getOsmElement(q) ?: return@withContext false
-
-        /** When OSM data is being updated (e.g. during download), first that data is persisted to
+        /* When OSM data is being updated (e.g. during download), first that data is persisted to
          *  the database and after that, the quests are updated on the new data.
          *
          *  Depending on the volume of the data, this may take some seconds. So in this time, OSM
@@ -200,7 +198,13 @@ import kotlin.collections.ArrayList
          *  go out of sync? It was like this (since v32) initially, but it made using the app
          *  (opening quests, solving quests) unusable and seemingly unresponsive while the app was
          *  downloading/updating data. See issue #2876 */
-        if (q.osmElementQuestType.isApplicableTo(e) == false) return@withContext false
+        val e = getOsmElement(q)
+        if (e == null || q.osmElementQuestType.isApplicableTo(e) == false) {
+            /* the quest should then just be removed immediately, otherwise it looks like a bug
+               (can't solve quest, it won't go away), see #3588 */
+            osmQuestController.delete(OsmQuestKey(q.elementType, q.elementId, q.questTypeName))
+            return@withContext false
+        }
 
         val changes = createOsmQuestChanges(q, e, answer)
         require(!changes.isEmpty()) {
