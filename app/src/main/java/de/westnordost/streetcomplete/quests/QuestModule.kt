@@ -171,6 +171,7 @@ import javax.inject.Singleton
         AddBusStopShelter(),  // used by at least OsmAnd
         AddBenchStatusOnBusStop(), // can be seen from across the street
         AddBinStatusOnBusStop(), // can be seen from across the street
+        AddBusStopFlag(), // can be seen from across the street
         AddTactilePavingBusStop(), // requires you to be very close to it
         AddBusStopName(), // requires text input
         AddBusStopRef(), // requires text input
