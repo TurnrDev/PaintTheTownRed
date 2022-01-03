@@ -63,6 +63,7 @@ import de.westnordost.streetcomplete.quests.barrier_type.AddStileType
 import de.westnordost.streetcomplete.quests.traffic_calming_type.AddTrafficCalmingType
 import de.westnordost.streetcomplete.quests.bollard_type.AddBollardType
 import de.westnordost.streetcomplete.quests.bus_stop_bin.AddBinStatusOnBusStop
+import de.westnordost.streetcomplete.quests.bus_stop_flag.AddBusStopFlag
 import de.westnordost.streetcomplete.quests.camera_type.AddCameraType
 import de.westnordost.streetcomplete.quests.charging_station_capacity.AddChargingStationCapacity
 import de.westnordost.streetcomplete.quests.charging_station_operator.AddChargingStationOperator
@@ -170,6 +171,7 @@ import javax.inject.Singleton
         AddBusStopShelter(),  // used by at least OsmAnd
         AddBenchStatusOnBusStop(), // can be seen from across the street
         AddBinStatusOnBusStop(), // can be seen from across the street
+        AddBusStopFlag(),
         AddTactilePavingBusStop(), // requires you to be very close to it
         AddBusStopName(), // requires text input
         AddBusStopRef(), // requires text input
