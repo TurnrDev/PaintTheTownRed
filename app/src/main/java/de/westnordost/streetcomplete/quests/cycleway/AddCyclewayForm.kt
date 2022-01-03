@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
 
 import de.westnordost.streetcomplete.R
-import de.westnordost.streetcomplete.data.elementfilter.toElementFilterExpression
 import de.westnordost.streetcomplete.data.osm.geometry.ElementPolylinesGeometry
 import de.westnordost.streetcomplete.data.elementfilter.toElementFilterExpression
 import de.westnordost.streetcomplete.databinding.QuestStreetSidePuzzleWithLastAnswerButtonBinding
